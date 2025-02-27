@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resq/utils/utils.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,6 +43,16 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    final res = ResponsiveHelper(context);
+    return Scaffold(
+      body: Column(
+        children: [
+          Image.asset('assets/fireman.png'),
+          Container(
+            color: Colors.amber,
+          )
+        ],
+      ),
+    );
   }
 }
