@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        primarySwatch: Colors.amber,
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
@@ -30,8 +31,6 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
       ),
       home: const OnboardingPage(),
     );
@@ -45,13 +44,26 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final res = ResponsiveHelper(context);
     return Scaffold(
-      body: Column(
-        children: [
-          Image.asset('assets/fireman.png'),
-          Container(
-            color: Colors.amber,
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/fireman.png'),
+              Container(
+                width: res.screenWidth,
+                height: res.height(0.53),
+                decoration: const BoxDecoration(
+                  color: Color(0xff0C3B2E),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
