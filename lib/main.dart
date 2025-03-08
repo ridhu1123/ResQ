@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:resq/pages/others/user_info.dart';
 import 'package:resq/utils/utils.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  await Supabase.initialize(
+      url: 'https://fibmjftonxyopwwiijav.supabase.co',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpYm1qZnRvbnh5b3B3d2lpamF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEzMzQ3OTgsImV4cCI6MjA1NjkxMDc5OH0.AKNjcEoMb-HBkRFpQV4KqXk9WBiMkGYHUpu6tdf_lhU');
   runApp(const MyApp());
 }
 
@@ -11,7 +18,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -59,6 +66,45 @@ class OnboardingPage extends StatelessWidget {
                     topLeft: Radius.circular(25),
                     topRight: Radius.circular(25),
                   ),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                        height: res.width(0.5),
+                        width: res.width(0.5),
+                        child: Image.asset('assets/logo.png')),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40, right: 40),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Your Crisis Navigator,Providing Support When It Matters Most',
+                            style: AppTextStyles.headlineMedium,
+                          ),
+                          SizedBox(
+                            height: res.width(0.08),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => const UserInfo());
+                            },
+                            child: Container(
+                              height: res.width(0.15),
+                              decoration: BoxDecoration(
+                                  color: const Color(0xffFFBA00),
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: Center(
+                                child: Text(
+                                  'Get Started',
+                                  style: AppTextStyles.headlineMediumBlack,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               )
             ],

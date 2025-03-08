@@ -3,11 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTextStyles {
   static TextStyle headlineLarge =
-      GoogleFonts.roboto(fontSize: 32, fontWeight: FontWeight.bold);
-  static TextStyle headlineMedium =
-      GoogleFonts.roboto(fontSize: 26, fontWeight: FontWeight.bold);
-  static TextStyle bodyLarge = GoogleFonts.roboto(fontSize: 18);
-  static TextStyle bodyMedium = GoogleFonts.roboto(fontSize: 12);
+      GoogleFonts.afacad(fontSize: 32, fontWeight: FontWeight.bold);
+  static TextStyle headlineMedium = GoogleFonts.afacad(
+      fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white);
+  static TextStyle headlineMediumBlack = GoogleFonts.afacad(
+      fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black);
+  static TextStyle bodyLargeWhite = GoogleFonts.afacad(
+      fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold);
+  static TextStyle bodyLargeBlack = GoogleFonts.afacad(
+      fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold);
+  static TextStyle bodyMedium = GoogleFonts.afacad(fontSize: 12);
 }
 
 class ResponsiveHelper {
