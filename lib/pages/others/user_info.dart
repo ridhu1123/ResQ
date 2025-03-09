@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:resq/services/functions/supabase_service.dart';
+import 'package:resq/services/models/users.dart';
 import 'package:resq/utils/utils.dart';
 import 'package:resq/widgets/textfeild.dart';
 
 class UserInfo extends StatelessWidget {
-  const UserInfo({super.key});
+  UserInfo({super.key});
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController bloodGroupController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +20,7 @@ class UserInfo extends StatelessWidget {
         onPressed: () {},
         backgroundColor: const Color(0xff0C3B2E),
         child: const Icon(
-          Icons.admin_panel_settings_outlined,
+          Icons.access_alarm_outlined,
           color: Color(0xffFFBA00),
         ),
       ),
@@ -92,16 +99,29 @@ class UserInfo extends StatelessWidget {
               SizedBox(
                 height: res.width(0.1),
               ),
-              Container(
-                width: res.width(0.5),
-                height: res.width(0.12),
-                decoration: BoxDecoration(
-                    color: const Color(0xffFFBA00),
-                    borderRadius: BorderRadius.circular(12)),
-                child: Center(
-                  child: Text(
-                    'Take me to safety',
-                    style: AppTextStyles.bodyLargeBlack,
+              InkWell(
+                onTap: () async {
+                  final user = UserModel(
+                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                    name: nameController.text,
+                    phone: phoneController.text,
+                    bloodGroup: bloodGroupController.text,
+                    gender: genderController.text,
+                    age: int.tryParse(ageController.text) ?? 0,
+                  );
+                  await SupabaseService.saveUserDetails(user);
+                },
+                child: Container(
+                  width: res.width(0.5),
+                  height: res.width(0.12),
+                  decoration: BoxDecoration(
+                      color: const Color(0xffFFBA00),
+                      borderRadius: BorderRadius.circular(12)),
+                  child: Center(
+                    child: Text(
+                      'Take me to safety',
+                      style: AppTextStyles.bodyLargeBlack,
+                    ),
                   ),
                 ),
               )

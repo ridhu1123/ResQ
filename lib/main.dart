@@ -51,6 +51,9 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final res = ResponsiveHelper(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -86,7 +89,7 @@ class OnboardingPage extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.to(() => const UserInfo());
+                              Get.to(() => UserInfo());
                             },
                             child: Container(
                               height: res.width(0.15),
