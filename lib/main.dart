@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resq/pages/others/user_info.dart';
+import 'package:resq/pages/others/user_signup.dart';
 import 'package:resq/utils/utils.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -51,9 +52,6 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final res = ResponsiveHelper(context);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
-      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -89,7 +87,7 @@ class OnboardingPage extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.to(() => UserInfo());
+                              Get.to(() => UserSignup());
                             },
                             child: Container(
                               height: res.width(0.15),

@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTextStyles {
   static TextStyle headlineLarge =
       GoogleFonts.afacad(fontSize: 32, fontWeight: FontWeight.bold);
+  static TextStyle headlineLargeBlack = GoogleFonts.afacad(
+      fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black);
   static TextStyle headlineMedium = GoogleFonts.afacad(
       fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white);
   static TextStyle headlineMediumBlack = GoogleFonts.afacad(
