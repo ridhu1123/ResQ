@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resq/pages/others/user_info.dart';
+import 'package:resq/pages/others/user_register.dart';
 import 'package:resq/pages/others/user_signup.dart';
+import 'package:resq/pages/tabs/home.dart';
+import 'package:resq/services/controllers/auth_controller.dart';
 import 'package:resq/utils/utils.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -10,6 +13,7 @@ void main() async {
       url: 'https://fibmjftonxyopwwiijav.supabase.co',
       anonKey:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpYm1qZnRvbnh5b3B3d2lpamF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEzMzQ3OTgsImV4cCI6MjA1NjkxMDc5OH0.AKNjcEoMb-HBkRFpQV4KqXk9WBiMkGYHUpu6tdf_lhU');
+  Get.put(AuthController());
   runApp(const MyApp());
 }
 
@@ -40,7 +44,25 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
       ),
-      home: const OnboardingPage(),
+      initialRoute: '/onboard',
+      getPages: [
+        GetPage(
+          name: '/onboard',
+          page: () => OnboardingPage(),
+        ),
+        GetPage(
+          name: '/signin',
+          page: () => UserSignup(),
+        ),
+        GetPage(
+          name: '/signup',
+          page: () => UserRegister(),
+        ),
+        GetPage(
+          name: '/home',
+          page: () => HomePage(),
+        )
+      ],
     );
   }
 }
@@ -86,9 +108,7 @@ class OnboardingPage extends StatelessWidget {
                             height: res.width(0.08),
                           ),
                           InkWell(
-                            onTap: () {
-                              Get.to(() => UserSignup());
-                            },
+                            onTap: () => Get.toNamed('/signin'),
                             child: Container(
                               height: res.width(0.15),
                               decoration: BoxDecoration(
