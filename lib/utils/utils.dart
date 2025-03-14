@@ -15,6 +15,8 @@ class AppTextStyles {
   static TextStyle bodyLargeBlack = GoogleFonts.afacad(
       fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold);
   static TextStyle bodyMedium = GoogleFonts.afacad(fontSize: 12);
+  static TextStyle bodyMediumWhite =
+      GoogleFonts.afacad(fontSize: 12, color: Colors.white);
 }
 
 class ResponsiveHelper {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resq/pages/others/splash.dart';
 import 'package:resq/pages/others/user_info.dart';
 import 'package:resq/pages/others/user_register.dart';
 import 'package:resq/pages/others/user_signup.dart';
@@ -44,8 +45,12 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
       ),
-      initialRoute: '/onboard',
+      initialRoute: '/',
       getPages: [
+        GetPage(
+          name: '/',
+          page: () => AuthChecker(),
+        ),
         GetPage(
           name: '/onboard',
           page: () => OnboardingPage(),
@@ -61,6 +66,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/home',
           page: () => HomePage(),
+        ),
+        GetPage(
+          name: '/profile',
+          page: () => UserInfo(),
         )
       ],
     );

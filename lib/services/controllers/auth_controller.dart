@@ -5,43 +5,49 @@ class AuthController extends GetxController {
   final supabase = Supabase.instance.client;
   var isLoading = false.obs;
 
-//signinFunction
+  // Sign In Function
   Future<void> signIn(String email, String password) async {
-    isLoading.value = true;
-    final response = await supabase.auth
-        .signInWithPassword(email: email, password: password);
+    try {
+      isLoading.value = true;
+      final AuthResponse response = await supabase.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      isLoading.value = false;
 
-    isLoading.value = false;
-    if (response.user != null) {
-      Get.offAllNamed('/home');
-    } else {
-      Get.snackbar('Error', response.error?.message ?? 'Sign in failed');
+      if (response.user != null) {
+        Get.offAllNamed('/home');
+      } else {
+        Get.snackbar('Sign In Failed', 'Invalid email or password');
+      }
+    } catch (e) {
+      isLoading.value = false;
+      Get.snackbar('Error', e.toString());
     }
   }
 
-//signUpFuntion
+  // Sign Up Function
   Future<void> signUp(String email, String password) async {
-    isLoading.value = true;
-    final response = await supabase.auth.signUp(
-      email: email,
-      password: password,
-    );
-    isLoading.value = false;
-    if (response.user != null) {
-      // Navigate to home if successful
-      Get.offAllNamed('/home');
-    } else {
-      Get.snackbar('Error', response.error?.message ?? 'Sign up failed');
+    try {
+      isLoading.value = true;
+      final response = await supabase.auth.signUp(
+        email: email,
+        password: password,
+      );
+      isLoading.value = false;
+
+      if (response.user != null) {
+        Get.offAllNamed('/home');
+      }
+    } catch (e) {
+      isLoading.value = false;
+      Get.snackbar('Error', e.toString());
     }
   }
 
-//signOutFuntion
+  // Sign Out Function
   Future<void> signOut() async {
     await supabase.auth.signOut();
     Get.offAllNamed('/login');
   }
-}
-
-extension on AuthResponse {
-  get error => null;
 }

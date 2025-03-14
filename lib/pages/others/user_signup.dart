@@ -42,7 +42,10 @@ class UserSignup extends StatelessWidget {
                       'Email',
                       style: AppTextStyles.bodyLargeBlack,
                     ),
-                    const CustomTextField(hintText: 'email'),
+                    CustomTextField(
+                      hintText: 'email',
+                      controller: emailController,
+                    ),
                     SizedBox(
                       height: res.width(0.05),
                     ),
@@ -50,7 +53,10 @@ class UserSignup extends StatelessWidget {
                       'Password',
                       style: AppTextStyles.bodyLargeBlack,
                     ),
-                    const CustomTextField(hintText: 'password'),
+                    CustomTextField(
+                      hintText: 'password',
+                      controller: passwordController,
+                    ),
                     SizedBox(
                       height: res.width(0.05),
                     ),
