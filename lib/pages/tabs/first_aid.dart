@@ -6,7 +6,7 @@ class FirstAidPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text('First aid'),
+      body: Center(child: Text('First aid')),
     );
   }
 }

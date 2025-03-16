@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:resq/services/controllers/auth_controller.dart';
 import 'package:resq/utils/utils.dart';
 
@@ -14,30 +13,6 @@ class HomePage extends StatelessWidget {
     final user = authController.supabase.auth.currentUser;
     return Scaffold(
       appBar: AppBar(),
-      bottomNavigationBar: const GNav(
-        backgroundColor: Color(0xff0C3B2E),
-        color: Color(0xffFFBA00),
-        gap: 8,
-        activeColor: Colors.white,
-        tabs: [
-          GButton(
-            icon: Icons.home_outlined,
-            text: 'Home',
-          ),
-          GButton(
-            icon: Icons.sos_sharp,
-            text: 'Emergency',
-          ),
-          GButton(
-            icon: Icons.local_hospital_outlined,
-            text: 'First Aid',
-          ),
-          GButton(
-            icon: Icons.person_3_outlined,
-            text: 'Profile',
-          )
-        ],
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -136,11 +111,6 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        authController.signOut();
-                      },
-                      child: Text('data'))
                 ],
               ),
             )

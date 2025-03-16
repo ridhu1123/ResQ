@@ -16,7 +16,7 @@ class AuthController extends GetxController {
       isLoading.value = false;
 
       if (response.user != null) {
-        Get.offAllNamed('/home');
+        Get.offAllNamed('/bottomnav');
       } else {
         Get.snackbar('Sign In Failed', 'Invalid email or password');
       }
@@ -37,7 +37,7 @@ class AuthController extends GetxController {
       isLoading.value = false;
 
       if (response.user != null) {
-        Get.offAllNamed('/home');
+        Get.offAllNamed('/bottomnav');
       }
     } catch (e) {
       isLoading.value = false;
@@ -48,6 +48,5 @@ class AuthController extends GetxController {
   // Sign Out Function
   Future<void> signOut() async {
     await supabase.auth.signOut();
-    Get.offAllNamed('/login');
   }
 }

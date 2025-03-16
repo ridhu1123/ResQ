@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resq/pages/others/bottomnav.dart';
 import 'package:resq/pages/others/splash.dart';
 import 'package:resq/pages/others/user_info.dart';
 import 'package:resq/pages/others/user_register.dart';
@@ -50,6 +51,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/',
           page: () => AuthChecker(),
+        ),
+        GetPage(
+          name: '/bottomnav',
+          page: () => BottomNavPage(),
         ),
         GetPage(
           name: '/onboard',

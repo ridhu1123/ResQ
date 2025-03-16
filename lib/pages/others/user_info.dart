@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:resq/services/controllers/auth_controller.dart';
 import 'package:resq/services/functions/supabase_service.dart';
 import 'package:resq/services/models/users.dart';
 import 'package:resq/utils/utils.dart';
 import 'package:resq/widgets/textfeild.dart';
 
 class UserInfo extends StatelessWidget {
+  final AuthController authController = Get.find();
   UserInfo({super.key});
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -14,13 +17,16 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = authController.supabase.auth.currentUser;
     final res = ResponsiveHelper(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          authController.signOut();
+        },
         backgroundColor: const Color(0xff0C3B2E),
         child: const Icon(
-          Icons.access_alarm_outlined,
+          Icons.logout_outlined,
           color: Color(0xffFFBA00),
         ),
       ),
@@ -112,14 +118,14 @@ class UserInfo extends StatelessWidget {
                   await SupabaseService.saveUserDetails(user);
                 },
                 child: Container(
-                  width: res.width(0.5),
+                  width: res.width(0.4),
                   height: res.width(0.12),
                   decoration: BoxDecoration(
                       color: const Color(0xffFFBA00),
                       borderRadius: BorderRadius.circular(12)),
                   child: Center(
                     child: Text(
-                      'Take me to safety',
+                      'Save',
                       style: AppTextStyles.bodyLargeBlack,
                     ),
                   ),
