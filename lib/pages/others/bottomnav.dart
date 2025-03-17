@@ -36,7 +36,7 @@ class BottomNavPage extends StatelessWidget {
                 navController.changeTabIndex(index); // Change tab
               },
               tabs: const [
-                GButton(icon: Icons.home_outlined, text: 'Home'),
+                GButton(icon: Icons.home, text: 'Home'),
                 GButton(icon: Icons.sos_outlined, text: 'Emergency'),
                 GButton(icon: Icons.local_hospital_outlined, text: 'First Aid'),
                 GButton(icon: Icons.person_2, text: 'Profile'),
