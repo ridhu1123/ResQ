@@ -18,6 +18,7 @@ class UserDetailsController extends GetxController {
     } else {
       status.value = 'Safe';
     }
+    print('Status changed to: ${status.value}');
   }
 
   // Function to save user details in Supabase
@@ -40,14 +41,14 @@ class UserDetailsController extends GetxController {
         }
       ]);
 
-      if (response.error == null) {
-        Get.snackbar('Success', 'Details saved successfully');
-        Get.offAllNamed('/home'); // Navigate to home after saving
-      } else {
-        Get.snackbar('Error', response.error!.message);
-      }
+      print('Response: $response'); // ✅ Print response to check its format
+
+      // ✅ Just assume success if no exception is thrown
+      Get.snackbar('Success', 'Details saved successfully');
+      Get.offAllNamed('/bottomnav'); // Navigate to home after saving
     } catch (e) {
-      Get.snackbar('Error', 'Failed to save data');
+      print('Exception occurred: $e'); // ✅ Print actual error message
+      Get.snackbar('Error', 'Failed to save data: $e');
     }
   }
 }

@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resq/services/controllers/auth_controller.dart';
+import 'package:resq/services/controllers/user_controller.dart';
 import 'package:resq/utils/utils.dart';
+import 'package:resq/widgets/textfeild.dart';
 
 class HomePage extends StatelessWidget {
+  final UserDetailsController controller = Get.find<UserDetailsController>();
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+  final TextEditingController noteController = TextEditingController();
   final AuthController authController = Get.find();
   HomePage({super.key});
 
@@ -27,7 +34,7 @@ class HomePage extends StatelessWidget {
               height: res.width(0.05),
             ),
             Container(
-              height: res.width(0.5),
+              height: res.width(0.35),
               width: res.width(0.9),
               decoration: BoxDecoration(
                   color: Color(0xff0C3B2E),
@@ -46,7 +53,7 @@ class HomePage extends StatelessWidget {
                       style: AppTextStyles.bodyLargeWhite,
                     ),
                     SizedBox(
-                      height: res.width(0.2),
+                      height: res.width(0.05),
                     ),
                     Row(
                       children: [
@@ -87,27 +94,49 @@ class HomePage extends StatelessWidget {
                       const Icon(Icons.arrow_forward)
                     ],
                   ),
-                  SizedBox(
-                    height: res.height(0.2),
-                    child: TextField(
-                      maxLines: 4,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: const BorderSide(color: Colors.white70),
-                        ),
+                  TextField(
+                    controller: noteController,
+                    maxLines: 3,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: const BorderSide(color: Colors.white70),
                       ),
                     ),
                   ),
-                  Container(
-                    height: res.width(0.15),
-                    decoration: BoxDecoration(
-                        color: const Color(0xffFFBA00),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Center(
-                      child: Text(
-                        'Ask for help!',
-                        style: AppTextStyles.headlineMediumBlack,
+                  SizedBox(
+                    height: res.width(0.04),
+                  ),
+                  CustomTextField(
+                    hintText: 'Name',
+                    controller: nameController,
+                  ),
+                  SizedBox(
+                    height: res.width(0.04),
+                  ),
+                  CustomTextField(
+                    hintText: 'Location',
+                    controller: locationController,
+                  ),
+                  SizedBox(
+                    height: res.width(0.04),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      controller.name.value = nameController.text;
+                      controller.location.value = locationController.text;
+                      controller.note.value = noteController.text;
+                    },
+                    child: Container(
+                      height: res.width(0.1),
+                      decoration: BoxDecoration(
+                          color: const Color(0xffFFBA00),
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Center(
+                        child: Text(
+                          'Ask for help!',
+                          style: AppTextStyles.headlineMediumBlack,
+                        ),
                       ),
                     ),
                   ),

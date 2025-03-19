@@ -5,6 +5,7 @@ import 'package:resq/pages/others/splash.dart';
 import 'package:resq/pages/others/user_info.dart';
 import 'package:resq/pages/others/user_register.dart';
 import 'package:resq/pages/others/user_signup.dart';
+import 'package:resq/pages/tabs/emergency.dart';
 import 'package:resq/pages/tabs/home.dart';
 import 'package:resq/services/controllers/auth_controller.dart';
 import 'package:resq/services/controllers/user_controller.dart';
@@ -77,7 +78,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/profile',
           page: () => UserInfo(),
-        )
+        ),
+        GetPage(
+          name: '/sos',
+          page: () => EmergencyPage(),
+        ),
       ],
     );
   }
