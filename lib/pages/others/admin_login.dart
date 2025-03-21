@@ -1,30 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:resq/pages/others/user_register.dart';
-import 'package:resq/services/controllers/auth_controller.dart';
+import 'package:resq/services/controllers/adminauth_controller.dart';
 import 'package:resq/utils/utils.dart';
 import 'package:resq/widgets/textfeild.dart';
 
-class UserSignup extends StatelessWidget {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final AuthController authController = Get.find();
-  UserSignup({super.key});
+class AdminLogin extends StatelessWidget {
+  AdminLogin({super.key});
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final AdminAuthController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     final res = ResponsiveHelper(context);
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed('/adminLogin');
-        },
-        backgroundColor: const Color(0xff0C3B2E),
-        child: const Icon(
-          Icons.admin_panel_settings,
-          color: Color(0xffFFBA00),
-        ),
-      ),
       backgroundColor: Color(0xff0C3B2E),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,7 +31,7 @@ class UserSignup extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Get Started with                     ResQ',
+                      'Enter your authorised credentials for Admin Login',
                       style: AppTextStyles.headlineLargeBlack,
                     ),
                     SizedBox(
@@ -73,13 +62,13 @@ class UserSignup extends StatelessWidget {
                     ),
                     Obx(() {
                       return authController.isLoading.value
-                          ? const Center(child: CircularProgressIndicator())
+                          ? const CircularProgressIndicator()
                           : Padding(
                               padding:
                                   const EdgeInsets.only(left: 110, right: 110),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  authController.signIn(
+                                  authController.signInAsAdmin(
                                     emailController.text,
                                     passwordController.text,
                                   );
@@ -113,29 +102,6 @@ class UserSignup extends StatelessWidget {
                     //     ),
                     //   ),
                     // ),
-                    SizedBox(
-                      height: res.width(0.05),
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: res.width(0.18),
-                        ),
-                        const Text(
-                          "Don't have an account?",
-                        ),
-                        SizedBox(
-                          width: res.width(0.03),
-                        ),
-                        InkWell(
-                          onTap: () => Get.to(() => UserRegister()),
-                          child: Text(
-                            'SignUp',
-                            style: AppTextStyles.bodyLargeBlack,
-                          ),
-                        )
-                      ],
-                    )
                   ],
                 ),
               ),

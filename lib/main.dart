@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:resq/pages/others/admin_home.dart';
+import 'package:resq/pages/others/admin_login.dart';
 import 'package:resq/pages/others/bottomnav.dart';
 import 'package:resq/pages/others/splash.dart';
 import 'package:resq/pages/others/user_info.dart';
@@ -7,6 +9,8 @@ import 'package:resq/pages/others/user_register.dart';
 import 'package:resq/pages/others/user_signup.dart';
 import 'package:resq/pages/tabs/emergency.dart';
 import 'package:resq/pages/tabs/home.dart';
+import 'package:resq/services/controllers/adminauth_controller.dart';
+import 'package:resq/services/controllers/adminhome_controller.dart';
 import 'package:resq/services/controllers/auth_controller.dart';
 import 'package:resq/services/controllers/user_controller.dart';
 import 'package:resq/utils/utils.dart';
@@ -19,6 +23,8 @@ void main() async {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpYm1qZnRvbnh5b3B3d2lpamF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEzMzQ3OTgsImV4cCI6MjA1NjkxMDc5OH0.AKNjcEoMb-HBkRFpQV4KqXk9WBiMkGYHUpu6tdf_lhU');
   Get.put(AuthController());
   Get.put(UserDetailsController());
+  Get.put(AdminAuthController());
+  Get.put(AdminHomeController());
   runApp(const MyApp());
 }
 
@@ -82,6 +88,14 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/sos',
           page: () => EmergencyPage(),
+        ),
+        GetPage(
+          name: '/adminLogin',
+          page: () => AdminLogin(),
+        ),
+        GetPage(
+          name: '/adminHome',
+          page: () => AdminHomePage(),
         ),
       ],
     );
