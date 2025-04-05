@@ -2,29 +2,34 @@ import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AdminHomeController extends GetxController {
-  final supabase = Supabase.instance.client;
-  var userList = [].obs; // Stores user details
+    final supabase = Supabase.instance.client;
+
+  var allUsers = <Map<String, dynamic>>[].obs;
   var isLoading = false.obs;
 
   @override
   void onInit() {
-    fetchUserDetails();
     super.onInit();
+    fetchAllUsers(); // Auto-fetch on controller init
   }
 
-  Future<void> fetchUserDetails() async {
-    isLoading.value = true;
-
+  // Fetch all user details from Supabase
+  Future<void> fetchAllUsers() async {
     try {
-      final response = await supabase.from('user_details').select('*');
+      isLoading.value = true;
 
-      if (response.isNotEmpty) {
-        userList.value = response;
-      } else {
-        Get.snackbar("No Data", "No users found");
-      }
+      final response = await supabase
+          .from('user_details')
+          .select()
+          .order('created_at', ascending: false);
+
+      allUsers.value = List<Map<String, dynamic>>.from(response);
+     isLoading.value = false;
+      print('Fetched all users: $allUsers');
     } catch (e) {
-      Get.snackbar("Error", "Failed to load data: ${e.toString()}");
+      isLoading.value = false;
+      print('Error fetching users: $e');
+      Get.snackbar('Error', 'Failed to fetch user data');
     } finally {
       isLoading.value = false;
     }

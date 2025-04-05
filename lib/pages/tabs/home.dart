@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:resq/services/controllers/auth_controller.dart';
+import 'package:resq/services/controllers/home_controller.dart';
 import 'package:resq/services/controllers/user_controller.dart';
 import 'package:resq/utils/utils.dart';
 import 'package:resq/widgets/textfeild.dart';
 
 class HomePage extends StatelessWidget {
   final UserDetailsController controller = Get.find<UserDetailsController>();
+  final HomeController homecontroller = Get.find<HomeController>();
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
@@ -27,58 +29,58 @@ class HomePage extends StatelessWidget {
             children: [
               Text(
                 "Welcome, ${user?.email ?? 'User'}!",
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
-              Text('No emergency alerts'),
-              Text("Let's get you prepared just in case"),
+              const Text('No emergency alerts'),
+              const Text("Let's get you prepared just in case"),
               SizedBox(
                 height: res.width(0.05),
               ),
-              Container(
-                height: res.width(0.35),
-                width: res.width(0.9),
-                decoration: BoxDecoration(
-                    color: Color(0xff0C3B2E),
-                    borderRadius: BorderRadius.circular(15)),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '10% chance of',
-                        style: AppTextStyles.bodyLargeWhite,
-                      ),
-                      Text(
-                        'ThunderStorm',
-                        style: AppTextStyles.bodyLargeWhite,
-                      ),
-                      SizedBox(
-                        height: res.width(0.05),
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: res.width(0.4),
-                          ),
-                          const Icon(
-                            Icons.location_city_outlined,
-                            color: Colors.white,
-                            size: 35,
-                          ),
-                          SizedBox(
-                            width: res.width(0.02),
-                          ),
-                          Text(
-                            'Haripad, Kerala',
-                            style: AppTextStyles.bodyLargeWhite,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+             Obx(() {
+  if (homecontroller.isLoadingLocation.value) {
+    return SizedBox(
+      height: res.width(0.35),
+      width: res.width(0.9),
+      child: const Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  return Container(
+    height: res.width(0.35),
+    width: res.width(0.9),
+    decoration: BoxDecoration(
+      color: const Color(0xff0C3B2E),
+      borderRadius: BorderRadius.circular(15),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('10% chance of', style: AppTextStyles.bodyLargeWhite),
+          Text('ThunderStorm', style: AppTextStyles.bodyLargeWhite),
+          SizedBox(height: res.width(0.05)),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                const Icon(Icons.location_city_outlined, color: Colors.white, size: 35),
+                SizedBox(width: res.width(0.02)),
+                Text(
+                  homecontroller.streetName.value.isNotEmpty
+                      ? homecontroller.streetName.value
+                      : "Fetching location...",
+                  style: AppTextStyles.bodyLargeWhite,
                 ),
-              ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}),
+
               Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
@@ -115,9 +117,15 @@ class HomePage extends StatelessWidget {
                     SizedBox(
                       height: res.width(0.04),
                     ),
-                    CustomTextField(
-                      hintText: 'Location',
-                      controller: locationController,
+                    InkWell(
+                      onTap: () {
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>LocationPickerScreen()));
+                      },
+                      child: CustomTextField(
+                        hintText: 'Location',
+                        controller: locationController,
+                        prefixIcon: Icons.location_on,
+                      ),
                     ),
                     SizedBox(
                       height: res.width(0.04),
@@ -127,6 +135,10 @@ class HomePage extends StatelessWidget {
                         controller.name.value = nameController.text;
                         controller.location.value = locationController.text;
                         controller.note.value = noteController.text;
+                        controller.saveUserDetails(
+                          latlong: homecontroller.latlong.string,
+                          // latlong: homecontroller.currentPosition
+                        );
                       },
                       child: Container(
                         height: res.width(0.1),

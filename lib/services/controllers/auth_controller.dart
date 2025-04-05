@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -7,6 +8,8 @@ class AuthController extends GetxController {
 
   // Sign In Function
   Future<void> signIn(String email, String password) async {
+       
+    
     try {
       isLoading.value = true;
       final AuthResponse response = await supabase.auth.signInWithPassword(
@@ -22,7 +25,24 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       isLoading.value = false;
-      Get.snackbar('Error', e.toString());
+      // Get.snackbar('Something went wrong', 'Please login again');
+      Get.dialog(
+         AlertDialog(
+    title: const Text("Alert",style: TextStyle(
+      fontWeight: FontWeight.bold
+    ),),
+    content:  const Text("Kindly check your inbox and verify your email address to proceed",style: TextStyle(
+      fontWeight: FontWeight.w600
+    ),),
+    actions: [
+      TextButton(
+        onPressed: () => Get.back(), // closes the dialog
+        child: const Text("OK"),
+      ),
+    ],
+  ),
+      );
+      // Get.snackbar('Error', e.toString());
     }
   }
 
@@ -37,11 +57,12 @@ class AuthController extends GetxController {
       isLoading.value = false;
 
       if (response.user != null) {
-        Get.offAllNamed('/bottomnav');
+        Get.offAllNamed('/signin');
       }
     } catch (e) {
       isLoading.value = false;
-      Get.snackbar('Error', e.toString());
+      // Get.snackbar('Error', e.toString());
+      Get.snackbar('Something went wrong', 'Please register again');
     }
   }
 

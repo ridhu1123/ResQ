@@ -13,17 +13,19 @@ import 'package:resq/pages/tabs/home.dart';
 import 'package:resq/services/controllers/adminauth_controller.dart';
 import 'package:resq/services/controllers/adminhome_controller.dart';
 import 'package:resq/services/controllers/auth_controller.dart';
+import 'package:resq/services/controllers/home_controller.dart';
 import 'package:resq/services/controllers/user_controller.dart';
 import 'package:resq/utils/utils.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   await Supabase.initialize(
-      url: 'https://fibmjftonxyopwwiijav.supabase.co',
+      url: 'https://dolpnoqygsrrqpuainhd.supabase.co',
       anonKey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpYm1qZnRvbnh5b3B3d2lpamF2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEzMzQ3OTgsImV4cCI6MjA1NjkxMDc5OH0.AKNjcEoMb-HBkRFpQV4KqXk9WBiMkGYHUpu6tdf_lhU');
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvbHBub3F5Z3NycnFwdWFpbmhkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4NTMxMzQsImV4cCI6MjA1OTQyOTEzNH0.WMeJsApkynSjBuPR2a4ndlVK0k0oh5Beam9bysCatzo');
   Get.put(AuthController());
   Get.put(UserDetailsController());
+  Get.put(HomeController());
   Get.put(AdminAuthController());
   Get.put(AdminHomeController());
   Get.put(FirstAidController());

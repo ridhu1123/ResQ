@@ -1,0 +1,2 @@
+C:/Users/Asus/rescue/android/app/.cxx/RelWithDebInfo/6u3l5245/x86/CMakeFiles/edit_cache.dir
+C:/Users/Asus/rescue/android/app/.cxx/RelWithDebInfo/6u3l5245/x86/CMakeFiles/rebuild_cache.dir

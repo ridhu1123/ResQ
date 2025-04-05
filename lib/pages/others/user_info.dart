@@ -22,7 +22,12 @@ class UserInfo extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.toNamed('/signin');
+          authController.signOut().whenComplete(
+            () {
+               Get.toNamed('/signin');
+            },
+          );
+         
         },
         backgroundColor: const Color(0xff0C3B2E),
         child: const Icon(

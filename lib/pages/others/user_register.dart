@@ -75,29 +75,30 @@ class UserRegister extends StatelessWidget {
                     ),
                     Obx(() {
                       return authController.isLoading.value
-                          ? const CircularProgressIndicator()
-                          : Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 110, right: 110),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  authController.signUp(
-                                    emailController.text,
-                                    passwordController.text,
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xffFFBA00),
-                                    foregroundColor: Colors.black,
-                                    padding: const EdgeInsets.only(
-                                        left: 50, right: 50),
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10))),
-                                child: const Text("Sign Up"),
-                              ),
-                            );
+                          ? const Align(
+                              alignment: Alignment.center,
+                            child: CircularProgressIndicator())
+                          : Align(
+                            alignment: Alignment.center,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                authController.signUp(
+                                  emailController.text,
+                                  passwordController.text,
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xffFFBA00),
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.only(
+                                      left: 50, right: 50),
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10))),
+                              child: const Text("Sign Up"),
+                            ),
+                          );
                     }),
                     // Padding(
                     //   padding: const EdgeInsets.only(left: 100, right: 100),
